@@ -1,15 +1,15 @@
 <template>
-  <div class="date">{{ date }}</div>
+  <div class="date font-serif text-center">
+    {{ $store.state.date }}
+  </div>
 </template>
 
 <script>
-import mapState from 'vuex'
-
-export default {
-  computed: {
-    ...mapState({
-      date: 'date'
-    })
-  }
-}
+export default {}
 </script>
+
+<style lang="postcss" scoped>
+.date {
+  font-size: 100px;
+}
+</style>

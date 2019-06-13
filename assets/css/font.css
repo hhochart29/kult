@@ -1,0 +1,36 @@
+@font-face {
+  font-family: TTCommons;
+  src: url(../fonts/TTCommons-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: TTCommons;
+  src: url(../fonts/TTCommons-Italic.ttf);
+  font-style: italic;
+}
+
+@font-face {
+  font-family: TTCommonsMedium;
+  src: url(../fonts/TTCommons-Medium.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: TTCommonsMedium;
+  src: url(../fonts/TTCommons-MediumItalic.ttf);
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  src: url(../fonts/PlayfairDisplay-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: PlayfairDisplay;
+  src: url(../fonts/PlayfairDisplay-Black.ttf);
+  font-style: italic;
+}

@@ -2,7 +2,8 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/en'
 
 export const state = () => ({
-  date: dayjs(new Date()).format('DD MMM YYYY')
+  date: dayjs(new Date()).format('MMMM DD[th] YYYY'),
+  currentHover: null
 })
 
 export const getters = {}
@@ -20,6 +21,12 @@ export const mutations = {
     state.date = dayjs(state.date)
       .add(1, 'day')
       .format('DD MMM YYYY')
+  },
+  setCurrentHover(state, value) {
+    state.currentHover = value
+  },
+  clearCurrentHover(state) {
+    state.currentHover = null
   }
 }
 

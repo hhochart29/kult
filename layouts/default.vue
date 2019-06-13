@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-yellow-100 min-h-screen">
+  <main class="bg-white min-h-screen">
     <kult-header />
     <nuxt class="container mx-auto" />
   </main>
