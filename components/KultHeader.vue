@@ -7,7 +7,7 @@
       <div
         v-for="link in menu"
         :key="`menu-${link.name}`"
-        class="menu-link px-5 cursor-pointer "
+        class="menu-link p-5"
         :class="
           link.name === $store.state.currentHover &&
             `font-bold text-${link.color}`
@@ -78,7 +78,7 @@ export default {
   transform: scaleX(1.5);
 }
 
-premium {
+.premium {
   transition: color 0.6s ease-in-out;
 }
 

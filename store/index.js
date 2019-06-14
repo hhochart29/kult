@@ -6,7 +6,16 @@ export const state = () => ({
   currentHover: null
 })
 
-export const getters = {}
+export const getters = {
+  currentColor: state =>
+    state.currentHover === 'Ads'
+      ? 'red'
+      : state.currentHover === 'Animation'
+      ? 'yellow'
+      : state.currentHover === 'Clips'
+      ? 'green'
+      : 'blue'
+}
 
 export const mutations = {
   prevDate(state) {

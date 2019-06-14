@@ -4,7 +4,6 @@
     width="94"
     height="49"
     fill="none"
-    class="cursor-pointer"
     :to="{ name: 'index' }"
   >
     <path

@@ -1,11 +1,5 @@
 <template>
-  <svg
-    width="20"
-    height="19"
-    viewBox="0 0 20 19"
-    fill="none"
-    class="cursor-pointer"
-  >
+  <svg width="20" height="19" viewBox="0 0 20 19" fill="none">
     <line
       x1="20"
       y1="1.5"

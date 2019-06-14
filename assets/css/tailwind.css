@@ -1,4 +1,10 @@
 @import './font.css';
 @tailwind base;
+
+
 @tailwind components;
 @tailwind utilities;
+
+* {
+  cursor: url('../images/ellipse.png'), none;
+}
