@@ -1,7 +1,14 @@
 <template>
   <div
-    class="date font-serif text-center leading-tight relative z-50"
-    :class="$store.state.currentHover && `text-${$store.getters.currentColor}`"
+    class="date font-serif text-center leading-tight relative z-50 font-bold"
+    :class="
+      ($store.state.currentTheme || $store.getters.currentColor) &&
+        `text-${
+          $store.getters.currentColor !== 'white'
+            ? $store.getters.currentColor
+            : 'black'
+        }`
+    "
   >
     {{ $store.state.date }}
   </div>

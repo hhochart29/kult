@@ -31,6 +31,6 @@
 
 @font-face {
   font-family: PlayfairDisplay;
-  src: url(../fonts/PlayfairDisplay-Black.ttf);
-  font-style: italic;
+  src: url(../fonts/PlayfairDisplay-Bold.ttf);
+  font-style: bold;
 }

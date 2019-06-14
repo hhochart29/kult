@@ -44,6 +44,9 @@ export default {
   /*
    ** Build configuration
    */
+  router: {
+    middleware: ['theme']
+  },
   build: {
     postcss: {
       plugins: {

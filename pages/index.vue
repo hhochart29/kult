@@ -55,7 +55,7 @@ export default {
     this.isNext = to.name
     setTimeout(() => {
       next()
-    }, 3000)
+    }, 1500)
   }
 }
 </script>
@@ -76,7 +76,6 @@ export default {
 }
 
 .category.isNext {
-  flex-grow: 10;
   flex-basis: 100%;
 }
 
@@ -89,7 +88,7 @@ export default {
 
 .category.hovered {
   z-index: 50;
-  transition: filter 0.4s ease-in-out 0.2s;
+  transition: all 0.4s ease-in-out 0.2s;
   filter: drop-shadow(0px 0px 54px rgba(0, 0, 0, 0.12));
 }
 

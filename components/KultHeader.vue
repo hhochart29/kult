@@ -9,10 +9,14 @@
           v-for="link in menu"
           :key="`menu-${link.name}`"
           :class="
-            link.name === $store.state.currentHover &&
+            link.name ===
+              ($store.state.currentTheme || $store.state.currentHover) &&
               `font-bold text-${link.color}`
           "
-          @mouseenter="$store.commit('setCurrentHover', link.name)"
+          @mouseenter="
+            !$store.state.currentTheme &&
+              $store.commit('setCurrentHover', link.name)
+          "
           @mouseleave="$store.commit('clearCurrentHover')"
         >
           <nuxt-link

@@ -3,7 +3,8 @@ import 'dayjs/locale/en'
 
 export const state = () => ({
   date: dayjs(new Date()).format('MMMM DD[th] YYYY'),
-  currentHover: null
+  currentHover: null,
+  currentTheme: null
 })
 
 export const getters = {
@@ -15,6 +16,14 @@ export const getters = {
       : state.currentHover === 'Clips'
       ? 'green'
       : state.currentHover === 'Shorts'
+      ? 'blue'
+      : state.currentTheme === 'Ads'
+      ? 'red'
+      : state.currentTheme === 'Animation'
+      ? 'yellow'
+      : state.currentTheme === 'Clips'
+      ? 'green'
+      : state.currentTheme === 'Shorts'
       ? 'blue'
       : 'white'
 }
@@ -38,6 +47,9 @@ export const mutations = {
   },
   clearCurrentHover(state) {
     state.currentHover = null
+  },
+  currentTheme(state, value) {
+    state.currentTheme = value
   }
 }
 
