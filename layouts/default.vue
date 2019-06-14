@@ -1,7 +1,12 @@
 <template>
-  <main class="bg-white min-h-screen">
+  <main
+    class="bg-white min-h-screen"
+    :class="`bg-${$store.getters.currentColor}-lightest`"
+  >
     <kult-header />
-    <nuxt class="container mx-auto" />
+    <transition name="slide" mode="out-in">
+      <nuxt class="container mx-auto" />
+    </transition>
   </main>
 </template>
 
@@ -14,3 +19,19 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 1.4s ease-in-out;
+}
+
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+}
+
+main {
+  transition: background-color 0.4s ease-in-out;
+}
+</style>

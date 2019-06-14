@@ -1,6 +1,6 @@
 <template>
   <div
-    class="date font-serif text-center leading-tight"
+    class="date font-serif text-center leading-tight relative z-50"
     :class="$store.state.currentHover && `text-${$store.getters.currentColor}`"
   >
     {{ $store.state.date }}

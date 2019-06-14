@@ -1,46 +1,55 @@
 <template>
-  <div
-    class="container mx-auto py-12 flex justify-between items-center font-sans"
-  >
-    <logo class="relative logo" />
-    <div class="menu-container flex items-center justify-center absolute">
-      <div
-        v-for="link in menu"
-        :key="`menu-${link.name}`"
-        class="menu-link p-5"
-        :class="
-          link.name === $store.state.currentHover &&
-            `font-bold text-${link.color}`
-        "
-        @mouseenter="$store.commit('setCurrentHover', link.name)"
-        @mouseleave="$store.commit('clearCurrentHover')"
-      >
-        {{ link.name }}
+  <div>
+    <div
+      class="container mx-auto py-12 flex justify-between items-center font-sans"
+    >
+      <logo class="relative logo" />
+      <div class="menu-container flex items-center justify-center absolute">
+        <div
+          v-for="link in menu"
+          :key="`menu-${link.name}`"
+          :class="
+            link.name === $store.state.currentHover &&
+              `font-bold text-${link.color}`
+          "
+          @mouseenter="$store.commit('setCurrentHover', link.name)"
+          @mouseleave="$store.commit('clearCurrentHover')"
+        >
+          <nuxt-link
+            :to="{ name: link.path || link.name }"
+            class="menu-link p-5"
+          >
+            {{ link.name }}
+          </nuxt-link>
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <nuxt-link
+          :to="{ name: 'premium' }"
+          class="premium relative border border-black px-6 pt-2 pb-1 mr-10 hover:text-white overflow-hidden"
+          ><span class="relative">Premium</span></nuxt-link
+        >
+        <Burger />
       </div>
     </div>
-    <div class="flex items-center justify-center">
-      <nuxt-link
-        :to="{ name: 'premium' }"
-        class="premium relative border border-black px-6 pt-2 pb-1 mr-10 hover:text-white overflow-hidden"
-        ><span class="relative">Premium</span></nuxt-link
-      >
-      <Burger />
-    </div>
+    <Date class="-mb-6" />
   </div>
 </template>
 
 <script>
 import Logo from '@/components/Logo'
 import Burger from '@/components/Burger'
+import Date from '@/components/Date'
 
 export default {
   components: {
     Logo,
-    Burger
+    Burger,
+    Date
   },
   data: () => ({
     menu: [
-      { name: 'Ads', color: 'red' },
+      { name: 'Ads', path: 'KultAds', color: 'red' },
       { name: 'Animation', color: 'yellow' },
       { name: 'Clips', color: 'green' },
       { name: 'Shorts', color: 'blue' }

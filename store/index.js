@@ -14,7 +14,9 @@ export const getters = {
       ? 'yellow'
       : state.currentHover === 'Clips'
       ? 'green'
-      : 'blue'
+      : state.currentHover === 'Shorts'
+      ? 'blue'
+      : 'white'
 }
 
 export const mutations = {

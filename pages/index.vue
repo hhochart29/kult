@@ -1,37 +1,46 @@
 <template>
   <div class="container">
-    <div class="-mb-12 z-10 relative">
-      <Date />
-    </div>
-    <div class="image-container flex justify-center items-center relative z-0">
-      <div
+    <div
+      class="image-container flex justify-center items-center relative z-0"
+      :class="{ nextActive: isNext !== null }"
+    >
+      <nuxt-link
         v-for="category in categories"
         :key="`category-${category.name}`"
-        class="-mx-2 category h-full w-full relative"
-        :class="{ hovered: category.name === $store.state.currentHover }"
-        @mouseenter="$store.commit('setCurrentHover', category.name)"
-        @mouseleave="$store.commit('clearCurrentHover')"
+        :class="[
+          { hovered: category.name === $store.state.currentHover },
+          {
+            isNext:
+              isNext !== null && isNext === (category.path || category.name)
+          },
+          `${$store.getters.currentColor}`
+        ]"
+        :to="{ name: category.path || category.name }"
+        tag="div"
+        class="-mx-2 category h-full relative flex-shrink"
       >
         <div
           :style="[{ backgroundImage: `url(${category.url})` }]"
           class="h-full w-full"
+          @mouseenter="$store.commit('setCurrentHover', category.name)"
+          @mouseleave="$store.commit('clearCurrentHover')"
         />
         <div />
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import Date from '@/components/Date'
-
 export default {
-  components: {
-    Date
-  },
   data: () => ({
+    isNext: null,
     categories: [
-      { name: 'Ads', url: require('@/assets/images/kult_ads.png') },
+      {
+        name: 'Ads',
+        path: 'KultAds',
+        url: require('@/assets/images/kult_ads.png')
+      },
       { name: 'Animation', url: require('@/assets/images/animation.jpg') },
       { name: 'Clips', url: require('@/assets/images/clips.jpg') },
       { name: 'Shorts', url: require('@/assets/images/shorts.jpg') }
@@ -42,10 +51,11 @@ export default {
       return this.$store.state.currentHover
     }
   },
-  watch: {
-    currentHoverStore(newVal) {
-      console.log(newVal)
-    }
+  beforeRouteLeave(to, from, next) {
+    this.isNext = to.name
+    setTimeout(() => {
+      next()
+    }, 3000)
   }
 }
 </script>
@@ -55,32 +65,41 @@ export default {
   height: 650px;
 }
 
+.nextActive .category:not(.isNext) {
+  flex-basis: 0px;
+  opacity: 0;
+}
+
 .category {
   flex-basis: 300px;
-  transition: filter 0.4s ease-in-out;
-  transition-delay: 0s;
+  transition: all 1s ease-in-out;
+}
+
+.category.isNext {
+  flex-grow: 10;
+  flex-basis: 100%;
 }
 
 .category > div {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  clip-path: polygon(11% 0, 100% 0, 89% 100%, 0% 100%);
+  clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
 }
 
 .category.hovered {
-  transition-delay: 0.2s;
+  z-index: 50;
+  transition: filter 0.4s ease-in-out 0.2s;
   filter: drop-shadow(0px 0px 54px rgba(0, 0, 0, 0.12));
 }
 
 .category > div::after,
 .category > div::before {
-  transition: transform 0.4s ease-in-out;
-  transition-delay: 0.4s;
+  transition: transform 0.4s ease-in-out 0.4s, background 0.4s ease-in-out 0s;
   content: '';
   transform: rotateX(0deg) scaleY(1);
   transform-origin: 0 0;
-  @apply absolute bg-white z-10 left-0 right-0;
+  @apply absolute z-10 left-0 right-0 bg-blue-lightest;
   height: 75px;
 }
 
@@ -98,5 +117,30 @@ export default {
 .category.hovered > div::after {
   transition-delay: 0s;
   transform: rotateX(0deg) scaleY(0);
+}
+
+.category.blue > div::after,
+.category.blue > div::before {
+  @apply bg-blue-lightest;
+}
+
+.category.green > div::after,
+.category.green > div::before {
+  @apply bg-green-lightest;
+}
+
+.category.red > div::after,
+.category.red > div::before {
+  @apply bg-red-lightest;
+}
+
+.category.yellow > div::after,
+.category.yellow > div::before {
+  @apply bg-yellow-lightest;
+}
+
+.category.white > div::after,
+.category.white > div::before {
+  @apply bg-white;
 }
 </style>
