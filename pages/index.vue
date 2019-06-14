@@ -58,6 +58,7 @@ export default {
 .category {
   flex-basis: 300px;
   transition: filter 0.4s ease-in-out;
+  transition-delay: 0s;
 }
 
 .category > div {
@@ -68,12 +69,14 @@ export default {
 }
 
 .category.hovered {
-  filter: drop-shadow(0px 1px 15px rgba(0, 0, 0, 0.15));
+  transition-delay: 0.2s;
+  filter: drop-shadow(0px 0px 54px rgba(0, 0, 0, 0.12));
 }
 
 .category > div::after,
 .category > div::before {
   transition: transform 0.4s ease-in-out;
+  transition-delay: 0.4s;
   content: '';
   transform: rotateX(0deg) scaleY(1);
   transform-origin: 0 0;
@@ -93,6 +96,7 @@ export default {
 
 .category.hovered > div::before,
 .category.hovered > div::after {
+  transition-delay: 0s;
   transform: rotateX(0deg) scaleY(0);
 }
 </style>
