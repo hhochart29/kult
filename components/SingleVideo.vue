@@ -1,7 +1,9 @@
 <template>
   <div ref="videoContainer" class="flex py-10">
-    <video src="https://www.youtube.com/watch?v=3eLittIRa8A" />
-    <div class="description">
+    <video class="bg-red">
+      <source type="video/youtube" src="https://vimeo.com/340009944" />
+    </video>
+    <div class="description p-2 lg:p-5">
       Test
     </div>
   </div>
@@ -9,14 +11,7 @@
 
 <script>
 export default {
-  props: {
-    videoID: {
-      type: Number,
-      default: 1
-    }
-  },
   mounted() {
-    console.log(document.querySelector('header').clientHeight)
     this.$refs.videoContainer.style.height = `calc(100vh - ${
       document.querySelector('header').clientHeight
     }px)`

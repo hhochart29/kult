@@ -4,7 +4,7 @@
       class="container mx-auto py-5 lg:py-12 flex justify-between items-center font-sans"
     >
       <logo class="relative logo" />
-      <div class="menu-container flex items-center justify-center absolute">
+      <nav class="menu-container flex items-center justify-center absolute">
         <div
           v-for="link in menu"
           :key="`menu-${link.name}`"
@@ -24,12 +24,12 @@
         >
           <nuxt-link
             :to="{ name: link.path || link.name }"
-            class="menu-link p-5"
+            class="menu-link p-5 relative block"
           >
             {{ link.name }}
           </nuxt-link>
         </div>
-      </div>
+      </nav>
       <div class="flex items-center justify-center">
         <nuxt-link
           :to="{ name: 'premium' }"
@@ -58,7 +58,7 @@ export default {
     menu: [
       { name: 'Ads', path: 'KultAds', color: 'red' },
       { name: 'Animation', color: 'yellow' },
-      { name: 'Clips', color: 'green' },
+      { name: 'Music', color: 'green' },
       { name: 'Shorts', color: 'blue' }
     ]
   })
@@ -99,5 +99,19 @@ export default {
 
 .premium > span {
   z-index: 1;
+}
+
+.nuxt-link-exact-active::after {
+  content: '';
+  @apply w-2 h-2 absolute;
+  bottom: 10px;
+  left: 50%;
+  background-color: currentColor;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 20%, 0% 100%, 100% 100%);
+}
+
+nav > div {
+  transition: color 0.4s ease-in-out;
 }
 </style>

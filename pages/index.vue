@@ -43,7 +43,7 @@ export default {
         url: require('@/assets/images/kult_ads.png')
       },
       { name: 'Animation', url: require('@/assets/images/animation.jpg') },
-      { name: 'Clips', url: require('@/assets/images/clips.jpg') },
+      { name: 'Music', url: require('@/assets/images/clips.jpg') },
       { name: 'Shorts', url: require('@/assets/images/shorts.jpg') }
     ]
   }),

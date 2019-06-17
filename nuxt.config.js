@@ -32,15 +32,16 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/eslint-module'
+    ['@nuxtjs/eslint-module'],
+    [
+      '@nuxtjs/apollo',
+      {
+        clientConfigs: {
+          default: '~/plugins/apollo-config.js'
+        }
+      }
+    ]
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
   /*
    ** Build configuration
    */
@@ -56,6 +57,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend (config, ctx) {}
+    extend(config, ctx) {}
   }
 }

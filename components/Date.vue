@@ -10,7 +10,7 @@
         }`
     "
   >
-    {{ $store.state.date }}
+    {{ $store.getters.formattedDate }}
   </div>
 </template>
 
