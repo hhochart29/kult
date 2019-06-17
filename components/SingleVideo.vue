@@ -1,6 +1,6 @@
 <template>
   <div ref="videoContainer" class="flex py-10">
-    <video src="http://www.youtube.com/watch?v=3eLittIRa8A" />
+    <video src="https://www.youtube.com/watch?v=3eLittIRa8A" />
     <div class="description">
       Test
     </div>
