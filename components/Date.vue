@@ -23,4 +23,9 @@ export default {}
   font-size: 100px;
   transition: color 0.4s ease-in-out;
 }
+@media (max-width: 980px) {
+  .date {
+    font-size: 50px;
+  }
+}
 </style>

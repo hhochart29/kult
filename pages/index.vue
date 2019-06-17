@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div
-      class="image-container flex justify-center items-center relative z-0"
+      ref="homeContainer"
+      class="image-container flex justify-center items-center relative z-0 -mt-12"
       :class="{ nextActive: isNext !== null }"
     >
       <nuxt-link
@@ -54,29 +55,43 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.isNext = to.name
     setTimeout(() => {
-      next()
-    }, 1500)
+      this.$refs.homeContainer.classList.add('leaving')
+      setTimeout(() => {
+        next()
+      }, 600)
+    }, 1800)
   }
 }
 </script>
 
 <style lang="postcss" scoped>
 .image-container {
-  height: 650px;
+  height: 630px;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.image-container.leaving {
+  opacity: 0;
 }
 
 .nextActive .category:not(.isNext) {
   flex-basis: 0px;
   opacity: 0;
+  margin: 0;
 }
 
 .category {
-  flex-basis: 300px;
+  flex-basis: 290px;
   transition: all 1s ease-in-out;
 }
 
 .category.isNext {
   flex-basis: 100%;
+  margin: 0;
+}
+
+.category.isNext > div {
+  clip-path: polygon(0% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 .category > div {
@@ -84,6 +99,7 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
+  transition: clip-path 0.3s ease-in-out 1s;
 }
 
 .category.hovered {

@@ -1,11 +1,13 @@
 <template>
-  <div>
-    Test Ads
-  </div>
+  <single-video />
 </template>
 
 <script>
+import SingleVideo from '@/components/SingleVideo'
+
 export default {
-  name: 'Ads'
+  components: {
+    SingleVideo
+  }
 }
 </script>

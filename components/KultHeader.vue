@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <header>
     <div
-      class="container mx-auto py-12 flex justify-between items-center font-sans"
+      class="container mx-auto py-5 lg:py-12 flex justify-between items-center font-sans"
     >
       <logo class="relative logo" />
       <div class="menu-container flex items-center justify-center absolute">
@@ -17,7 +17,10 @@
             !$store.state.currentTheme &&
               $store.commit('setCurrentHover', link.name)
           "
-          @mouseleave="$store.commit('clearCurrentHover')"
+          @mouseleave="
+            !$store.state.currentHover === null &&
+              $store.commit('clearCurrentHover')
+          "
         >
           <nuxt-link
             :to="{ name: link.path || link.name }"
@@ -36,8 +39,8 @@
         <Burger />
       </div>
     </div>
-    <Date class="-mb-6" />
-  </div>
+    <Date />
+  </header>
 </template>
 
 <script>
@@ -66,11 +69,10 @@ export default {
 .logo {
   top: -15px;
 }
+
 .menu-container {
   left: 50%;
   transform: translateX(-50%);
-}
-.menu-link {
 }
 
 .premium::after {

@@ -23,7 +23,7 @@ export default {
 <style lang="postcss" scoped>
 .slide-enter-active,
 .slide-leave-active {
-  transition: opacity 1.4s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .slide-enter,
