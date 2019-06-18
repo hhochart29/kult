@@ -2,28 +2,27 @@
   <div class="container">
     <div
       ref="homeContainer"
-      class="image-container flex justify-center items-center relative z-0 -mt-12"
+      class="image-container flex justify-center items-center relative z-0 -mt-10"
       :class="{ nextActive: isNext !== null }"
     >
       <nuxt-link
-        v-for="category in categories"
-        :key="`category-${category.name}`"
+        v-for="video in $store.getters.videosOfTheDay"
+        :key="`category-${video.id}`"
         :class="[
-          { hovered: category.name === $store.state.currentHover },
+          { hovered: video.category.name === $store.state.currentHover },
           {
-            isNext:
-              isNext !== null && isNext === (category.path || category.name)
+            isNext: isNext !== null && isNext === video.category.name
           },
           `${$store.getters.currentColor}`
         ]"
-        :to="{ name: category.path || category.name }"
+        :to="{ name: video.category.name }"
         tag="div"
         class="-mx-2 category h-full relative flex-shrink"
       >
         <div
-          :style="[{ backgroundImage: `url(${category.url})` }]"
+          :style="[{ backgroundImage: `url(${video.coverImage.url})` }]"
           class="h-full w-full"
-          @mouseenter="$store.commit('setCurrentHover', category.name)"
+          @mouseenter="$store.commit('setCurrentHover', video.category.name)"
           @mouseleave="$store.commit('clearCurrentHover')"
         />
         <div />

@@ -13,11 +13,18 @@
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
-      class="w-full video"
+      class="w-full flex-grow video"
     ></iframe>
-    <div class="description p-2 lg:p-5">
-      Test
+    <div v-show="$store.state.descriptionShown" class="description p-2 lg:p-5">
+      qweqweqwe
     </div>
+
+    <button
+      class="text-white underline p-5 self-center"
+      @click="$store.commit('toggleDescription')"
+    >
+      {{ $store.state.descriptionShown ? 'close' : 'See more' }}
+    </button>
   </div>
   <div v-else>No video for that day :(</div>
 </template>
@@ -34,8 +41,13 @@ export default {
 
 <style lang="postcss" scoped>
 .video {
-  flex-grow: 0;
-  flex-shrink: 1;
   flex-basis: 70%;
+  transition: all 0.4s ease-in-out;
+}
+
+button:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
 }
 </style>

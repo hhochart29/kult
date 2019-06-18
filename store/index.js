@@ -6,7 +6,8 @@ export const state = () => ({
   date: dayjs(new Date()),
   currentHover: null,
   currentTheme: null,
-  videos: []
+  videos: [],
+  descriptionShown: false
 })
 
 export const getters = {
@@ -32,6 +33,24 @@ export const getters = {
         )
       }
     })
+  },
+  videosOfTheDay: state => {
+    if (state.videos.length === 0) return false
+    const filtered = state.videos.filter(video => {
+      return dayjs(video.date).isSame(dayjs(state.date), 'day')
+    })
+
+    filtered.sort((a, b) => {
+      if (a.category.name < b.category.name) {
+        return -1
+      }
+      if (a.category.name > b.category.name) {
+        return 1
+      }
+      return 0
+    })
+
+    return filtered
   }
 }
 
@@ -56,6 +75,9 @@ export const mutations = {
   },
   setAllVideos(state, value) {
     state.videos = value
+  },
+  toggleDescription(state) {
+    state.descriptionShown = !state.descriptionShown
   }
 }
 
