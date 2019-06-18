@@ -1,12 +1,25 @@
 <template>
-  <div ref="videoContainer" class="flex py-10">
-    <video class="bg-red">
-      <source type="video/youtube" src="https://vimeo.com/340009944" />
-    </video>
+  <div
+    v-if="$store.getters.currentVideo"
+    ref="videoContainer"
+    class="flex py-10"
+  >
+    <iframe
+      :src="
+        `https://player.vimeo.com/video/${$store.getters.currentVideo.videoUrl
+          .split('/')
+          .pop()}`
+      "
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      class="w-full video"
+    ></iframe>
     <div class="description p-2 lg:p-5">
       Test
     </div>
   </div>
+  <div v-else>No video for that day :(</div>
 </template>
 
 <script>
@@ -20,7 +33,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-video {
+.video {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: 70%;

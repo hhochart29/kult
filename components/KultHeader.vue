@@ -8,17 +8,18 @@
         <div
           v-for="link in menu"
           :key="`menu-${link.name}`"
-          :class="
-            link.name ===
-              ($store.state.currentTheme || $store.state.currentHover) &&
-              `font-bold text-${link.color}`
-          "
+          :class="{
+            'font-bold':
+              link.name ===
+              ($store.state.currentTheme || $store.state.currentHover),
+            'text-white': $store.getters.isDark
+          }"
           @mouseenter="
             !$store.state.currentTheme &&
               $store.commit('setCurrentHover', link.name)
           "
           @mouseleave="
-            !$store.state.currentHover === null &&
+            ;(!$store.state.currentHover === null || $route.path !== 'index') &&
               $store.commit('clearCurrentHover')
           "
         >
@@ -33,7 +34,11 @@
       <div class="flex items-center justify-center">
         <nuxt-link
           :to="{ name: 'premium' }"
-          class="premium relative border border-black px-6 pt-2 pb-1 mr-10 hover:text-white overflow-hidden"
+          :class="[
+            { dark: $store.getters.isDark },
+            $store.getters.currentColor
+          ]"
+          class="premium relative border px-6 pt-2 pb-1 mr-10 overflow-hidden"
           ><span class="relative">Premium</span></nuxt-link
         >
         <Burger />
@@ -75,6 +80,47 @@ export default {
   transform: translateX(-50%);
 }
 
+.premium:hover::after {
+  transform: scaleX(1.5);
+}
+
+.premium {
+  transition: color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+}
+
+.premium:not(.dark) {
+  @apply text-black border-black;
+}
+
+.premium:not(.dark):hover {
+  @apply text-white;
+}
+
+.premium.dark {
+  @apply text-white border-white;
+}
+
+.dark.blue:hover {
+  @apply text-blue;
+}
+.dark.green:hover {
+  @apply text-green;
+}
+.dark.red:hover {
+  @apply text-red;
+}
+.dark.yellow:hover {
+  @apply text-yellow;
+}
+
+.premium.dark::after {
+  @apply bg-white;
+}
+
+.premium > span {
+  z-index: 1;
+}
+
 .premium::after {
   content: '';
   z-index: 0;
@@ -87,18 +133,6 @@ export default {
   transform-origin: 0 0;
   transition: transform 0.6s ease-in-out;
   clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
-}
-
-.premium:hover::after {
-  transform: scaleX(1.5);
-}
-
-.premium {
-  transition: color 0.6s ease-in-out;
-}
-
-.premium > span {
-  z-index: 1;
 }
 
 .nuxt-link-exact-active::after {

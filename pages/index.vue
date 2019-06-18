@@ -114,7 +114,7 @@ export default {
   content: '';
   transform: rotateX(0deg) scaleY(1);
   transform-origin: 0 0;
-  @apply absolute z-10 left-0 right-0 bg-blue-lightest;
+  @apply absolute z-10 left-0 right-0 bg-blue;
   height: 75px;
 }
 
@@ -136,22 +136,22 @@ export default {
 
 .category.blue > div::after,
 .category.blue > div::before {
-  @apply bg-blue-lightest;
+  @apply bg-blue;
 }
 
 .category.green > div::after,
 .category.green > div::before {
-  @apply bg-green-lightest;
+  @apply bg-green;
 }
 
 .category.red > div::after,
 .category.red > div::before {
-  @apply bg-red-lightest;
+  @apply bg-red;
 }
 
 .category.yellow > div::after,
 .category.yellow > div::before {
-  @apply bg-yellow-lightest;
+  @apply bg-yellow;
 }
 
 .category.white > div::after,

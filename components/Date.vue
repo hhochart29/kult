@@ -1,14 +1,7 @@
 <template>
   <div
     class="date font-serif text-center leading-tight relative z-50 font-bold"
-    :class="
-      ($store.state.currentTheme || $store.getters.currentColor) &&
-        `text-${
-          $store.getters.currentColor !== 'white'
-            ? $store.getters.currentColor
-            : 'black'
-        }`
-    "
+    :class="$store.getters.isDark ? 'text-white' : 'text-black'"
   >
     {{ $store.getters.formattedDate }}
   </div>

@@ -11,6 +11,7 @@ export const state = () => ({
 
 export const getters = {
   formattedDate: state => dayjs(new Date()).format('MMMM DD[th] YYYY'),
+  isDark: state => state.currentHover || state.currentTheme,
   currentColor: state =>
     (state.currentHover || state.currentTheme) === 'Ads'
       ? 'red'
@@ -21,12 +22,14 @@ export const getters = {
       : (state.currentHover || state.currentTheme) === 'Shorts'
       ? 'blue'
       : 'white',
-  // dayjs(video._publishedAt).isSame(dayjs(state.date), 'day') &&
   currentVideo: state => {
     if (!state.currentTheme || state.videos.length === 0) return false
-    return state.videos.filter(video => {
+    return state.videos.find(video => {
       if (video && video.category) {
-        return video.category.name === state.currentTheme
+        return (
+          video.category.name === state.currentTheme &&
+          dayjs(video.date).isSame(dayjs(state.date), 'day')
+        )
       }
     })
   }

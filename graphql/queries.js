@@ -4,9 +4,9 @@ export const allVideos = gql`
   {
     allVideos {
       id
-      _publishedAt
       title
       description
+      date
       producer {
         nameFirstname
       }

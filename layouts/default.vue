@@ -1,7 +1,7 @@
 <template>
   <main
     class="bg-white min-h-screen"
-    :class="`bg-${$store.getters.currentColor}-lightest`"
+    :class="`bg-${$store.getters.currentColor}`"
   >
     <kult-header />
     <transition name="slide" mode="out-in">

@@ -8,20 +8,16 @@ module.exports = {
       },
       colors: {
         yellow: {
-          default: '#FFC226',
-          lightest: '#FFE298'
+          default: '#E7AE00'
         },
         red: {
-          default: '#E48068',
-          lightest: '#FCB9A9'
+          default: '#DD6E54'
         },
         green: {
-          default: '#3EBAB4',
-          lightest: '#A7F4F1'
+          default: '#32B5AE'
         },
         blue: {
-          default: '#58B0F1',
-          lightest: '#DEF1FF'
+          default: '#45A2E9'
         },
         black: '#000000',
         white: '#FFFDF3'
