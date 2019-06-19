@@ -4,7 +4,7 @@
     ref="videoContainer"
     class="videoContainer flex py-10 pb-16"
   >
-    <div class="video relative w-full flex-grow pr-2 lg:mr-5 pl-0 lg:ml-20">
+    <div class="video relative w-full flex-grow mr-4 lg:mr-10 pl-0 lg:ml-20">
       <transition name="fade">
         <div
           v-show="coverShown"
@@ -55,7 +55,13 @@
       </div>
 
       <div class="flex">
-        <div v-for="{ tag } in video.tags" :key="`tag-${tag}`">#{{ tag }}</div>
+        <div
+          v-for="{ tag } in video.tags"
+          :key="`tag-${tag}`"
+          class="mr-2 px-1"
+        >
+          #{{ tag }}
+        </div>
       </div>
     </div>
 
