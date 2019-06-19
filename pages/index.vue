@@ -11,11 +11,16 @@
         :class="[
           { hovered: video.category.name === $store.state.currentHover },
           {
-            isNext: isNext !== null && isNext === video.category.name
+            isNext:
+              isNext !== null &&
+              (isNext === video.category.name ||
+                (isNext === 'KultAds' && video.category.name === 'Ads'))
           },
           `${$store.getters.currentColor}`
         ]"
-        :to="{ name: video.category.name }"
+        :to="{
+          name: video.category.name === 'Ads' ? 'KultAds' : video.category.name
+        }"
         tag="div"
         class="-mx-2 category h-full relative flex-shrink"
       >
@@ -34,23 +39,8 @@
 <script>
 export default {
   data: () => ({
-    isNext: null,
-    categories: [
-      {
-        name: 'Ads',
-        path: 'KultAds',
-        url: require('@/assets/images/kult_ads.png')
-      },
-      { name: 'Animation', url: require('@/assets/images/animation.jpg') },
-      { name: 'Music', url: require('@/assets/images/clips.jpg') },
-      { name: 'Shorts', url: require('@/assets/images/shorts.jpg') }
-    ]
+    isNext: null
   }),
-  computed: {
-    currentHoverStore() {
-      return this.$store.state.currentHover
-    }
-  },
   beforeRouteLeave(to, from, next) {
     this.isNext = to.name
     setTimeout(() => {

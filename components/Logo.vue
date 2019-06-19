@@ -6,7 +6,7 @@
       tag="svg"
       width="60"
       height="60"
-      viewBox="0 0 64 64"
+      view-box="0 0 64 64"
       fill="none"
       :to="{ name: 'index' }"
     >
@@ -57,7 +57,7 @@
       key="secondLogo"
       tag="svg"
       height="60"
-      viewBox="0 0 94 49"
+      view-box="0 0 94 49"
       fill="none"
       :to="{ name: 'index' }"
     >
