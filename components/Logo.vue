@@ -113,14 +113,4 @@
 svg path {
   transition: all 0.4s ease-in-out;
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: 0.4s opacity ease-in-out;
-}
-
-.fade-leave-to,
-.fade-enter {
-  opacity: 0;
-}
 </style>

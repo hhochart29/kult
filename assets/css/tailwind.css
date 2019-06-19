@@ -8,3 +8,13 @@
 * {
   cursor: url('../images/ellipse.png'), none;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.4s opacity ease-in-out;
+}
+
+.fade-leave-to,
+.fade-enter {
+  opacity: 0;
+}
