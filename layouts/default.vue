@@ -1,8 +1,5 @@
 <template>
-  <main
-    class="bg-white min-h-screen"
-    :class="`bg-${$store.getters.currentColor}`"
-  >
+  <main class="min-h-screen" :class="`bg-${$store.getters.currentColor}`">
     <kult-header />
     <transition name="slide" mode="out-in">
       <nuxt class="container mx-auto" />

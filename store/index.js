@@ -7,7 +7,8 @@ export const state = () => ({
   currentHover: null,
   currentTheme: null,
   videos: [],
-  descriptionShown: false
+  descriptionShown: false,
+  darkTheme: false
 })
 
 export const getters = {
@@ -78,6 +79,9 @@ export const mutations = {
   },
   toggleDescription(state) {
     state.descriptionShown = !state.descriptionShown
+  },
+  toggleDarkTheme(state, value) {
+    state.darkTheme = value || !state.darkTheme
   }
 }
 

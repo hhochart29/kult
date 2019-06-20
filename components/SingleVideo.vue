@@ -8,10 +8,17 @@
       <div class="video relative w-full flex-grow mr-4 lg:mr-10 pl-0 lg:ml-20">
         <kult-video-player />
 
-        <div class="social flex w-full items-center justify-end mt-5">
-          <div class="px-2"><share /></div>
-          <div class="px-2"><bookmark /></div>
-          <div class="px-2"><clap /></div>
+        <div class="social flex w-full items-center justify-between mt-5">
+          <div class="flex">
+            <div class="px-2" @click="$store.commit('toggleDarkTheme')">
+              <cinema />
+            </div>
+            <div class="px-2"><share /></div>
+          </div>
+          <div class="flex">
+            <div class="px-2"><bookmark /></div>
+            <div class="px-2"><clap /></div>
+          </div>
         </div>
       </div>
       <div
@@ -43,10 +50,7 @@
           </div>
         </div>
       </div>
-      <button
-        class="text-white underline p-2 self-center"
-        @click="$store.commit('toggleDescription')"
-      >
+      <button class="text-white underline p-2 self-center" @click="modeCinema">
         {{ $store.state.descriptionShown ? 'close' : 'See more' }}
       </button>
     </div>
@@ -59,12 +63,15 @@ import KultVideoPlayer from '@/components/KultVideoPlayer'
 import Clap from '@/components/svg/Clap'
 import Share from '@/components/svg/Share'
 import Bookmark from '@/components/svg/Bookmark'
+import Cinema from '@/components/svg/Cinema'
+
 export default {
   components: {
     KultVideoPlayer,
     Clap,
     Share,
-    Bookmark
+    Bookmark,
+    Cinema
   },
   computed: {
     video() {
@@ -75,6 +82,11 @@ export default {
     this.$refs.videoContainer.style.height = `calc(100vh - ${
       document.querySelector('header').clientHeight
     }px)`
+  },
+  methods: {
+    modeCinema() {
+      this.$store.commit('toggleDescription')
+    }
   }
 }
 </script>

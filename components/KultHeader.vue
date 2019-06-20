@@ -9,11 +9,12 @@
           v-for="link in menu"
           :key="`menu-${link.name}`"
           :class="{
-            'font-bold':
+            'font-bold arrow':
               link.name ===
               ($store.state.currentTheme || $store.state.currentHover),
             'text-white': $store.getters.isDark
           }"
+          class="relative"
           @mouseenter="
             !$store.state.currentTheme &&
               $store.commit('setCurrentHover', link.name)
@@ -135,7 +136,7 @@ export default {
   clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
 }
 
-.nuxt-link-exact-active::after {
+nav > div::after {
   content: '';
   @apply w-2 h-2 absolute;
   bottom: 10px;
@@ -143,6 +144,13 @@ export default {
   background-color: currentColor;
   transform: translateX(-50%);
   clip-path: polygon(50% 20%, 0% 100%, 100% 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.arrow::after,
+.nuxt-link-exact-active::after {
+  opacity: 1;
 }
 
 nav > div {

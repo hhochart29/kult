@@ -5,8 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+main {
   cursor: url('../images/ellipse.png'), none;
+}
+
+main.bg-black {
+  cursor: url('../images/ellipse-white.png'), none;
 }
 
 .fade-enter-active,
