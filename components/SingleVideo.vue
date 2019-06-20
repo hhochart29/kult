@@ -2,84 +2,70 @@
   <div
     v-if="video"
     ref="videoContainer"
-    class="videoContainer flex py-10 pb-16"
+    class="videoContainer flex flex-col py-10"
   >
-    <div class="video relative w-full flex-grow mr-4 lg:mr-10 pl-0 lg:ml-20">
-      <transition name="fade">
-        <div
-          v-show="coverShown"
-          class="cover h-full w-full absolute left-0 top-0"
-          :style="{ backgroundImage: `url(${video.coverImage.url})` }"
-          @click="coverShown = false"
-        >
-          <span class="play absolute flex items-center">
-            <svg width="29" height="34" view-box="0 0 29 34" fill="none">
-              <path
-                d="M1 28.4775C1 31.1346 3.83108 32.8324 6.17284 31.5796L26.142 20.897C28.5361 19.6162 28.6376 16.2189 26.3243 14.7973L6.35514 2.52569C4.01283 1.08628 1 2.77269 1 5.5232L1 28.4775Z"
-                fill="white"
-                stroke="white"
-                stroke-width="2"
-              />
-            </svg>
-            <span class="text-white font-sans font-bold text-xl relative pl-6">
-              Play
-            </span>
-          </span>
-        </div>
-      </transition>
-      <iframe
-        :src="video.videoUrl"
-        class="w-full h-full"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-    <div
-      v-show="$store.state.descriptionShown"
-      class="description text-white pr-2 lg:pr-5 flex flex-col justify-between"
-    >
-      <div class="text-3xl font-bold font-sans tracking-wide uppercase">
-        {{ video.title }}
-      </div>
+    <div class="flex h-full pb-20">
+      <div class="video relative w-full flex-grow mr-4 lg:mr-10 pl-0 lg:ml-20">
+        <kult-video-player />
 
-      <div class="producer relative font-sans text-xl mt-4 mb-10 font-thin">
-        by
-        <span class="uppercase font-normal">{{
-          video.producer.nameFirstname
-        }}</span>
-      </div>
-
-      <div>
-        {{ video.description }}
-      </div>
-
-      <div class="flex">
-        <div
-          v-for="{ tag } in video.tags"
-          :key="`tag-${tag}`"
-          class="mr-2 px-1"
-        >
-          #{{ tag }}
+        <div class="social flex w-full items-center justify-end mt-5">
+          <div class="px-2"><share /></div>
+          <div class="px-2"><bookmark /></div>
+          <div class="px-2"><clap /></div>
         </div>
       </div>
-    </div>
+      <div
+        v-show="$store.state.descriptionShown"
+        class="description text-white pr-2 lg:pr-5 flex flex-col justify-between"
+      >
+        <div class="text-3xl font-bold font-sans tracking-wide uppercase">
+          {{ video.title }}
+        </div>
 
-    <button
-      class="text-white underline p-2 self-center"
-      @click="$store.commit('toggleDescription')"
-    >
-      {{ $store.state.descriptionShown ? 'close' : 'See more' }}
-    </button>
+        <div class="producer relative font-sans text-xl mt-4 mb-10 font-thin">
+          by
+          <span class="uppercase font-normal">{{
+            video.producer.nameFirstname
+          }}</span>
+        </div>
+
+        <div>
+          {{ video.description }}
+        </div>
+
+        <div class="flex">
+          <div
+            v-for="{ tag } in video.tags"
+            :key="`tag-${tag}`"
+            class="mr-2 px-1"
+          >
+            #{{ tag }}
+          </div>
+        </div>
+      </div>
+      <button
+        class="text-white underline p-2 self-center"
+        @click="$store.commit('toggleDescription')"
+      >
+        {{ $store.state.descriptionShown ? 'close' : 'See more' }}
+      </button>
+    </div>
   </div>
   <div v-else>No video for that day :(</div>
 </template>
 
 <script>
+import KultVideoPlayer from '@/components/KultVideoPlayer'
+import Clap from '@/components/svg/Clap'
+import Share from '@/components/svg/Share'
+import Bookmark from '@/components/svg/Bookmark'
 export default {
-  data: () => ({
-    coverShown: true
-  }),
+  components: {
+    KultVideoPlayer,
+    Clap,
+    Share,
+    Bookmark
+  },
   computed: {
     video() {
       return this.$store.getters.currentVideo
@@ -103,20 +89,8 @@ export default {
   transition: all 0.4s ease-in-out;
 }
 
-.cover {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-.play {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.play .text-white {
-  top: 2px;
+.social > div:hover {
+  animation: 0.4s ease-in-out pulse;
 }
 
 .description {
@@ -140,5 +114,19 @@ button:focus {
   box-shadow: none;
   border: none;
   outline: none;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.25, 1.25, 1.25);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
 }
 </style>
