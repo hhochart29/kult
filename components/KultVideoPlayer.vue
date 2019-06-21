@@ -34,10 +34,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="postcss">
 .video-js {
   @apply w-full h-full;
 }
+
 .video-js .vjs-big-play-button {
   border: none;
   position: absolute;

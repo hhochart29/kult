@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header ref="kultHeader">
     <div
       class="container mx-auto py-5 lg:py-12 flex justify-between items-center font-sans"
     >
@@ -34,7 +34,7 @@
       </nav>
       <div class="flex items-center justify-center">
         <nuxt-link
-          :to="{ name: 'premium' }"
+          :to="{ name: 'index' }"
           :class="[
             { dark: $store.getters.isDark },
             $store.getters.currentColor
@@ -67,7 +67,25 @@ export default {
       { name: 'Music', color: 'green' },
       { name: 'Shorts', color: 'blue' }
     ]
-  })
+  }),
+  computed: {
+    darkTheme() {
+      return this.$store.state.darkTheme
+    }
+  },
+  watch: {
+    darkTheme(oldVal, newVal) {
+      this.$nextTick(() => {
+        this.$store.commit(
+          'setHeaderHeight',
+          this.$refs.kultHeader.clientHeight
+        )
+      })
+    }
+  },
+  mounted() {
+    this.$store.commit('setHeaderHeight', this.$refs.kultHeader.clientHeight)
+  }
 }
 </script>
 

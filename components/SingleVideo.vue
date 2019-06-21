@@ -3,27 +3,38 @@
     v-if="video"
     ref="videoContainer"
     class="videoContainer flex flex-col py-10"
+    :style="videoContainerStyle"
   >
     <div class="flex h-full pb-20">
-      <div class="video relative w-full flex-grow mr-4 lg:mr-10 pl-0 lg:ml-20">
-        <kult-video-player />
-
-        <div class="social flex w-full items-center justify-between mt-5">
+      <div
+        class="video relative w-full flex-grow mr-4 lg:mr-10 lg:ml-20"
+        :class="{ cinema: $store.state.darkTheme }"
+      >
+        <kult-video-player class="z-40 relative" />
+        <transition name="fade">
+          <div
+            v-show="$store.state.darkTheme"
+            class="h-screen w-screen z-20 fixed top-0 left-0 cinema"
+          ></div>
+        </transition>
+        <div
+          class="social flex w-full items-center justify-between mt-5 relative z-50"
+        >
           <div class="flex">
-            <div class="px-2" @click="$store.commit('toggleDarkTheme')">
+            <div class="px-2"><clap /></div>
+            <div class="px-2"><bookmark /></div>
+          </div>
+          <div class="flex">
+            <div class="px-2" @click="modeCinema">
               <cinema />
             </div>
             <div class="px-2"><share /></div>
           </div>
-          <div class="flex">
-            <div class="px-2"><bookmark /></div>
-            <div class="px-2"><clap /></div>
-          </div>
         </div>
       </div>
       <div
-        v-show="$store.state.descriptionShown"
-        class="description text-white pr-2 lg:pr-5 flex flex-col justify-between"
+        :class="{ kulthidden: !$store.state.descriptionShown }"
+        class="description text-white pr-2 lg:pr-5 flex flex-col justify-between overflow-hidden"
       >
         <div class="text-3xl font-bold font-sans tracking-wide uppercase">
           {{ video.title }}
@@ -50,12 +61,18 @@
           </div>
         </div>
       </div>
-      <button class="text-white underline p-2 self-center" @click="modeCinema">
+      <button
+        :class="{ kulthidden: $store.state.darkTheme }"
+        class="text-white underline p-2 self-center overflow-hidden"
+        @click="$store.commit('toggleDescription')"
+      >
         {{ $store.state.descriptionShown ? 'close' : 'See more' }}
       </button>
     </div>
   </div>
-  <div v-else>No video for that day :(</div>
+  <div v-else class="text-white text-4xl font-sans text-center mt-20">
+    No video for that day :( Keep scrolling
+  </div>
 </template>
 
 <script>
@@ -76,42 +93,58 @@ export default {
   computed: {
     video() {
       return this.$store.getters.currentVideo
+    },
+    videoContainerStyle() {
+      return {
+        height: `calc(100vh - ${this.$store.state.headerHeight}px)`
+      }
     }
-  },
-  mounted() {
-    this.$refs.videoContainer.style.height = `calc(100vh - ${
-      document.querySelector('header').clientHeight
-    }px)`
   },
   methods: {
     modeCinema() {
-      this.$store.commit('toggleDescription')
+      this.$store.commit('toggleDescription', 'off')
+      this.$store.commit('toggleDarkTheme')
     }
   }
 }
 </script>
 
 <style lang="postcss" scoped>
+.cinema {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .videoContainer {
-  max-height: 700px;
+  max-height: 90vh;
 }
 
 .video {
   flex-basis: 70%;
-  transition: all 0.4s ease-in-out;
 }
 
-.social > div:hover {
+.video.cinema {
+  @apply ml-10;
+}
+
+.social > div > div:hover {
   animation: 0.4s ease-in-out pulse;
 }
 
 .description {
   flex-basis: 30%;
+  transition: transform 0.4s ease-in-out 0.4s, flex-basis 0.4s ease-in-out 0s;
 }
 
 button {
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+.kulthidden {
+  transition: transform 0.4s ease-in-out 0s, flex-basis 0.4s ease-in-out 0.4s;
+  flex-basis: 0;
+  transform: scaleX(0);
+  padding: 0;
 }
 
 .producer::after {

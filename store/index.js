@@ -3,6 +3,7 @@ import 'dayjs/locale/en'
 import { allVideos } from '@/graphql/queries'
 
 export const state = () => ({
+  headerHeight: 300,
   date: dayjs(new Date()),
   currentHover: null,
   currentTheme: null,
@@ -56,6 +57,9 @@ export const getters = {
 }
 
 export const mutations = {
+  setHeaderHeight(state, value) {
+    state.headerHeight = value
+  },
   prevDate(state) {
     state.date = dayjs(state.date).subtract(1, 'day')
   },
@@ -77,10 +81,10 @@ export const mutations = {
   setAllVideos(state, value) {
     state.videos = value
   },
-  toggleDescription(state) {
-    state.descriptionShown = !state.descriptionShown
+  toggleDescription(state, value = null) {
+    state.descriptionShown = value === 'off' ? false : !state.descriptionShown
   },
-  toggleDarkTheme(state, value) {
+  toggleDarkTheme(state, value = null) {
     state.darkTheme = value || !state.darkTheme
   }
 }
