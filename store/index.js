@@ -21,9 +21,9 @@ export const getters = {
       : (state.currentHover || state.currentTheme) === 'Animation'
       ? 'yellow'
       : (state.currentHover || state.currentTheme) === 'Music'
-      ? 'green'
-      : (state.currentHover || state.currentTheme) === 'Shorts'
       ? 'blue'
+      : (state.currentHover || state.currentTheme) === 'Shorts'
+      ? 'green'
       : 'white',
   currentVideo: state => {
     if (!state.currentTheme || state.videos.length === 0) return false

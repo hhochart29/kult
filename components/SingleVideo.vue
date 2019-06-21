@@ -143,8 +143,8 @@ button {
 .kulthidden {
   transition: transform 0.4s ease-in-out 0s, flex-basis 0.4s ease-in-out 0.4s;
   flex-basis: 0;
-  transform: scaleX(0);
   padding: 0;
+  transform: scaleX(0);
 }
 
 .producer::after {
