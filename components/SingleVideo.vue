@@ -15,6 +15,7 @@
           <div
             v-show="$store.state.darkTheme"
             class="h-screen w-screen z-20 fixed top-0 left-0 cinema"
+            @click.self="modeCinema"
           ></div>
         </transition>
         <div
@@ -90,6 +91,9 @@ export default {
     Bookmark,
     Cinema
   },
+  data: () => ({
+    throttle: false
+  }),
   computed: {
     video() {
       return this.$store.getters.currentVideo
@@ -100,7 +104,25 @@ export default {
       }
     }
   },
+  mounted() {
+    window.addEventListener('wheel', this.wheelHandler)
+  },
+  destroyed() {
+    window.removeEventListener('wheel', this.wheelHandler)
+  },
   methods: {
+    wheelHandler({ deltaY }) {
+      if (Math.abs(deltaY) < 30) return false
+      if (!this.throttle) {
+        this.throttle = true
+        deltaY > 50
+          ? this.$store.commit('prevDate')
+          : this.$store.commit('nextDate')
+        setTimeout(() => {
+          this.throttle = false
+        }, 1000)
+      }
+    },
     modeCinema() {
       this.$store.commit('toggleDescription', 'off')
       this.$store.commit('toggleDarkTheme')

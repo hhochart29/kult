@@ -1,6 +1,8 @@
+import { allVideos } from '@/graphql/queries'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en'
-import { allVideos } from '@/graphql/queries'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+dayjs.extend(isSameOrAfter)
 
 export const state = () => ({
   headerHeight: 300,
@@ -9,11 +11,12 @@ export const state = () => ({
   currentTheme: null,
   videos: [],
   descriptionShown: false,
-  darkTheme: false
+  darkTheme: false,
+  slideWay: null
 })
 
 export const getters = {
-  formattedDate: state => dayjs(new Date()).format('MMMM DD[th] YYYY'),
+  formattedDate: state => dayjs(state.date).format('MMMM DD[th] YYYY'),
   isDark: state => state.currentHover || state.currentTheme,
   currentColor: state =>
     (state.currentHover || state.currentTheme) === 'Ads'
@@ -61,10 +64,12 @@ export const mutations = {
     state.headerHeight = value
   },
   prevDate(state) {
+    state.slideWay = 'prev'
     state.date = dayjs(state.date).subtract(1, 'day')
   },
   nextDate(state) {
-    if (dayjs(state.date).isSameOrAfter(dayjs(new Date()))) {
+    state.slideWay = 'next'
+    if (dayjs(state.date).isSameOrAfter(dayjs(new Date()), 'day')) {
       return false
     }
     state.date = dayjs(state.date).add(1, 'day')
