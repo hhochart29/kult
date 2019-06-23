@@ -70,6 +70,16 @@
         >
           {{ $store.state.descriptionShown ? 'close' : 'See more' }}
         </button>
+        <div
+          class="absolute mouse text-white font-sans flex justify-center flex-wrap"
+        >
+          <span
+            class="block w-6 h-10 border-2 border-white rounded-full relative"
+          ></span>
+          <span class="block w-full text-center pt-2">
+            scroll to go back in time
+          </span>
+        </div>
       </div>
     </transition>
   </div>
@@ -205,6 +215,41 @@ button:focus {
   box-shadow: none;
   border: none;
   outline: none;
+}
+
+.mouse {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mouse > span:first-child:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  left: 50%;
+  @apply bg-white absolute rounded-full my-2;
+  animation: 1.5s wheelScroll ease-in-out infinite;
+}
+
+@keyframes wheelScroll {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0%);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(300%);
+  }
 }
 
 @keyframes pulse {
