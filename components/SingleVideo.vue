@@ -153,6 +153,7 @@ export default {
   },
   methods: {
     wheelHandler({ deltaY }) {
+      console.log(deltaY)
       if (
         deltaY > 0 &&
         dayjs(this.$store.state.date).isSameOrAfter(dayjs(new Date()), 'day')
