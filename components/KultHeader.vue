@@ -34,6 +34,20 @@
       </nav>
       <div class="flex items-center justify-center">
         <nuxt-link
+          v-if="$route.name !== 'index'"
+          :to="{ name: 'index' }"
+          :class="[
+            { dark: $store.getters.isDark },
+            $store.getters.currentColor
+          ]"
+          class="mosaique mr-5 lg:mr-10"
+        >
+          <span class=""></span>
+          <span class=""></span>
+          <span class=""></span>
+          <span class=""></span>
+        </nuxt-link>
+        <nuxt-link
           :to="{ name: 'index' }"
           :class="[
             { dark: $store.getters.isDark },
@@ -78,7 +92,7 @@ export default {
       this.$nextTick(() => {
         this.$store.commit(
           'setHeaderHeight',
-          this.$refs.kultHeader.clientHeight
+          this.$refs.kultHeader && this.$refs.kultHeader.clientHeight
         )
       })
     }
@@ -130,6 +144,19 @@ export default {
 }
 .dark.yellow:hover {
   @apply text-yellow;
+}
+
+.mosaique {
+  width: 25px;
+  height: 25px;
+  @apply flex flex-wrap justify-center items-center;
+}
+
+.mosaique > span {
+  margin: 2px;
+  flex-basis: calc(50% - 4px);
+  height: calc(50% - 4px);
+  @apply bg-white;
 }
 
 .premium.dark::after {

@@ -177,7 +177,7 @@ export default {
 }
 
 .videoContainer {
-  max-height: 90vh;
+  max-height: 800px;
 }
 
 .video {
