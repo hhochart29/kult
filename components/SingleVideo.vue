@@ -22,9 +22,21 @@
           <div
             class="social flex w-full items-center justify-between mt-5 relative z-40"
           >
-            <div class="flex">
-              <div class="px-2"><clap /></div>
-              <div class="px-2"><bookmark /></div>
+            <div class="flex items-end">
+              <div
+                class="px-2 relative mr-1 action"
+                :class="{ active: clapActive }"
+                @click="clap"
+              >
+                <clap />
+              </div>
+              <div
+                class="px-2 relative action"
+                :class="{ active: bookmarkActive }"
+                @click="bookmark"
+              >
+                <bookmark />
+              </div>
             </div>
             <div class="flex">
               <div class="px-2" @click="modeCinema">
@@ -114,7 +126,9 @@ export default {
     throttle: false,
     transitionning: false,
     mouseShown: true,
-    localVideo: null
+    localVideo: null,
+    clapActive: false,
+    bookmarkActive: false
   }),
   computed: {
     video() {
@@ -174,6 +188,12 @@ export default {
     modeCinema() {
       this.$store.commit('toggleDescription', 'off')
       this.$store.commit('toggleDarkTheme')
+    },
+    clap() {
+      this.clapActive = !this.clapActive
+    },
+    bookmark() {
+      this.bookmarkActive = !this.bookmarkActive
     }
   }
 }
@@ -264,6 +284,19 @@ button:focus {
     opacity: 0;
     transform: translateX(-50%) translateY(300%);
   }
+}
+
+.action::after {
+  content: '';
+  @apply absolute w-full left-0 bg-white mt-2 w-4;
+  left: 50%;
+  height: 1px;
+  transition: transform 0.4s ease-in-out;
+  transform: translateX(-50%) scaleX(0);
+}
+
+.action.active::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 .prevtransformY-enter-active,
