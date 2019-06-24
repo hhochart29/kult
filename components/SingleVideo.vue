@@ -2,7 +2,7 @@
   <div
     v-if="video"
     ref="videoContainer"
-    class="videoContainer flex flex-col py-10"
+    class="videoContainer relative flex flex-col py-10"
     :style="videoContainerStyle"
   >
     <transition :name="`${$store.state.slideWay}transformY`">
@@ -73,7 +73,7 @@
         <transition name="fadeMouse">
           <div
             v-if="mouseShown"
-            class="fixed mouse text-white font-sans flex justify-center flex-wrap"
+            class="absolute mouse text-white font-sans flex justify-center flex-wrap"
           >
             <span
               class="block w-6 h-10 border-2 border-white rounded-full relative"
@@ -155,7 +155,7 @@ export default {
       if (Math.abs(deltaY) < 30) return false
       if (!this.throttle) {
         this.throttle = true
-        deltaY > 50
+        deltaY < 50
           ? this.$store.commit('prevDate')
           : this.$store.commit('nextDate')
         setTimeout(() => {
