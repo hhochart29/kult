@@ -94,12 +94,11 @@ export default {
 .category.hovered {
   z-index: 50;
   transition: all 0.4s ease-in-out 0.2s;
-  filter: drop-shadow(0px 0px 54px rgba(0, 0, 0, 0.12));
 }
 
 .category > div::after,
 .category > div::before {
-  transition: transform 0.4s ease-in-out 0.4s, background 0.4s ease-in-out 0s;
+  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out 0s;
   content: '';
   transform: rotateX(0deg) scaleY(1);
   transform-origin: 0 0;
