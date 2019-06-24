@@ -100,7 +100,7 @@ import Clap from '@/components/svg/Clap'
 import Share from '@/components/svg/Share'
 import Bookmark from '@/components/svg/Bookmark'
 import Cinema from '@/components/svg/Cinema'
-import { setTimeout } from 'timers'
+import dayjs from 'dayjs'
 
 export default {
   components: {
@@ -138,7 +138,9 @@ export default {
         setTimeout(() => {
           this.localVideo = newVal
           this.transitionning = false
-          this.mouseShown = true
+          setTimeout(() => {
+            this.mouseShown = true
+          }, 600)
         }, 400)
       })
     }
@@ -151,6 +153,12 @@ export default {
   },
   methods: {
     wheelHandler({ deltaY }) {
+      if (
+        deltaY > 0 &&
+        dayjs(this.$store.state.date).isSameOrAfter(dayjs(new Date()), 'day')
+      ) {
+        return false
+      }
       this.$store.commit('toggleDarkTheme', 'off')
       if (Math.abs(deltaY) < 30) return false
       if (!this.throttle) {
