@@ -153,9 +153,8 @@ export default {
   },
   methods: {
     wheelHandler({ deltaY }) {
-      console.log(deltaY)
       if (
-        deltaY > 0 &&
+        deltaY < 0 &&
         dayjs(this.$store.state.date).isSameOrAfter(dayjs(new Date()), 'day')
       ) {
         return false
@@ -164,7 +163,7 @@ export default {
       if (!this.throttle) {
         this.throttle = true
         this.$store.commit('toggleDarkTheme', 'off')
-        deltaY < 0
+        deltaY > 0
           ? this.$store.commit('prevDate')
           : this.$store.commit('nextDate')
         setTimeout(() => {
