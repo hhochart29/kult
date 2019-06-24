@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="{ active: $store.state.burgerShown }"
-    class="bg-black fixed top-0 left-0 w-screen h-screen z-50 burger"
-  >
+  <div class="bg-black fixed top-0 left-0 w-screen h-screen z-50 burger">
     <div class="w-full h-full relative px-20 py-10">
       <div class="flex justify-between items-center">
         <nuxt-link
