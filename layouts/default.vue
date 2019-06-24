@@ -1,5 +1,13 @@
 <template>
   <main class="min-h-screen" :class="`bg-${$store.getters.currentColor}`">
+    <transition name="fade">
+      <div
+        v-if="loading"
+        class="z-50 fixed w-screen h-screen top-0 left-0 bg-black"
+      >
+        <main-logo class="text-blue" />
+      </div>
+    </transition>
     <kult-header />
     <transition name="slide" mode="out-in">
       <nuxt class="container mx-auto overflow-hidden" />
@@ -9,10 +17,20 @@
 
 <script>
 import KultHeader from '@/components/KultHeader'
+import MainLogo from '@/components/svg/MainLogo'
 
 export default {
   components: {
-    KultHeader
+    KultHeader,
+    MainLogo
+  },
+  data: () => ({
+    loading: false
+  }),
+  mounted() {
+    // setTimeout(() => {
+    //   this.loading = false
+    // }, 4000)
   }
 }
 </script>

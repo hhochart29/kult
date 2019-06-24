@@ -23,10 +23,10 @@ export default {
     playerOptions() {
       return {
         ...this.playerOptionsDefault,
-        poster: this.currentVideo.coverImage.url,
+        poster: this.currentVideo && this.currentVideo.coverImage.url,
         techOrder: ['youtube'],
         sources: {
-          src: this.currentVideo.videoUrl,
+          src: this.currentVideo && this.currentVideo.videoUrl,
           type: 'video/youtube'
         }
       }

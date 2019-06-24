@@ -70,23 +70,25 @@
         >
           {{ $store.state.descriptionShown ? 'close' : 'See more' }}
         </button>
-        <div
-          class="absolute mouse text-white font-sans flex justify-center flex-wrap"
-        >
-          <span
-            class="block w-6 h-10 border-2 border-white rounded-full relative"
-          ></span>
-          <span class="block w-full text-center pt-2">
-            scroll to go back in time
-          </span>
-        </div>
+        <transition name="fadeMouse">
+          <div
+            v-if="mouseShown"
+            class="fixed mouse text-white font-sans flex justify-center flex-wrap"
+          >
+            <span
+              class="block w-6 h-10 border-2 border-white rounded-full relative"
+            ></span>
+            <span class="block w-full text-center pt-2">
+              scroll to go back in time
+            </span>
+          </div>
+        </transition>
       </div>
     </transition>
   </div>
   <div
     v-else-if="!transitionning"
     class="text-white text-4xl font-sans text-center mt-20"
-    :style="videoContainerStyle"
   >
     No video for that day :( Keep scrolling
   </div>
@@ -111,6 +113,7 @@ export default {
   data: () => ({
     throttle: false,
     transitionning: false,
+    mouseShown: true,
     localVideo: null
   }),
   computed: {
@@ -128,12 +131,14 @@ export default {
   },
   watch: {
     storeVideo(newVal, oldVal) {
+      this.mouseShown = false
       this.localVideo = oldVal
       this.$nextTick(() => {
         this.transitionning = true
         setTimeout(() => {
           this.localVideo = newVal
           this.transitionning = false
+          this.mouseShown = true
         }, 400)
       })
     }
@@ -146,6 +151,7 @@ export default {
   },
   methods: {
     wheelHandler({ deltaY }) {
+      this.$store.commit('toggleDarkTheme', 'off')
       if (Math.abs(deltaY) < 30) return false
       if (!this.throttle) {
         this.throttle = true
@@ -290,6 +296,14 @@ button:focus {
 
 .nexttransformY-enter {
   transform: translateY(20px);
+  opacity: 0;
+}
+
+.fadeMouse-enter-active {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fadeMouse-enter {
   opacity: 0;
 }
 </style>

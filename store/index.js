@@ -90,7 +90,7 @@ export const mutations = {
     state.descriptionShown = value === 'off' ? false : !state.descriptionShown
   },
   toggleDarkTheme(state, value = null) {
-    state.darkTheme = value || !state.darkTheme
+    state.darkTheme = value === 'off' ? false : !state.darkTheme
   }
 }
 
