@@ -159,10 +159,10 @@ export default {
       ) {
         return false
       }
-      this.$store.commit('toggleDarkTheme', 'off')
       if (Math.abs(deltaY) < 30) return false
       if (!this.throttle) {
         this.throttle = true
+        this.$store.commit('toggleDarkTheme', 'off')
         deltaY < 50
           ? this.$store.commit('prevDate')
           : this.$store.commit('nextDate')
