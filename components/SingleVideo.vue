@@ -164,7 +164,7 @@ export default {
       if (!this.throttle) {
         this.throttle = true
         this.$store.commit('toggleDarkTheme', 'off')
-        deltaY < 50
+        deltaY < 0
           ? this.$store.commit('prevDate')
           : this.$store.commit('nextDate')
         setTimeout(() => {
