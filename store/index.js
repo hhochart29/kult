@@ -12,7 +12,8 @@ export const state = () => ({
   videos: [],
   descriptionShown: false,
   darkTheme: false,
-  slideWay: null
+  slideWay: null,
+  burgerShown: false
 })
 
 export const getters = {
@@ -91,6 +92,9 @@ export const mutations = {
   },
   toggleDarkTheme(state, value = null) {
     state.darkTheme = value === 'off' ? false : !state.darkTheme
+  },
+  toggleBurger(state) {
+    state.burgerShown = !state.burgerShown
   }
 }
 

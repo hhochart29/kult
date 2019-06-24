@@ -32,7 +32,7 @@
           </nuxt-link>
         </div>
       </nav>
-      <div class="flex items-center justify-center">
+      <div class="flex justify-center">
         <nuxt-link
           v-if="$route.name !== 'index'"
           :to="{ name: 'index' }"
@@ -53,7 +53,7 @@
             { dark: $store.getters.isDark },
             $store.getters.currentColor
           ]"
-          class="premium relative border px-6 pt-2 pb-1 mr-10 overflow-hidden"
+          class="premium relative border px-6 pt-2 pb-1 mr-8 overflow-hidden"
           ><span class="relative">Premium</span></nuxt-link
         >
         <Burger />
