@@ -152,6 +152,10 @@ export default {
   @apply flex flex-wrap justify-center items-center;
 }
 
+.mosaique:hover {
+  animation: 0.4s ease-in-out pulse;
+}
+
 .mosaique > span {
   margin: 2px;
   flex-basis: calc(50% - 4px);
@@ -200,5 +204,19 @@ nav > div::after {
 
 nav > div {
   transition: color 0.4s ease-in-out;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.25, 1.25, 1.25);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
 }
 </style>

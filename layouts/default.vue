@@ -27,10 +27,29 @@ export default {
   data: () => ({
     loading: false
   }),
+  computed: {
+    storeCurrentColor() {
+      return this.$store.getters.currentColor
+    }
+  },
+  watch: {
+    storeCurrentColor: {
+      handler: function(newVal, oldVal) {
+        if (this.$nuxt.$isServer) return false
+        this.$nextTick(() => {
+          if (!document) return false
+          const html = document.querySelector('html')
+          html.classList.add(`bg-${newVal}`)
+          html.classList.remove(`bg-${oldVal}`)
+        })
+      },
+      immediate: true
+    }
+  },
   mounted() {
-    // setTimeout(() => {
-    //   this.loading = false
-    // }, 4000)
+    setTimeout(() => {
+      this.loading = false
+    }, 4000)
   }
 }
 </script>
