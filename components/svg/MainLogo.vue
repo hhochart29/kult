@@ -1,8 +1,15 @@
 <template>
-  <svg height="60" view-box="0 0 94 49" fill="none" class="fill-current">
+  <svg
+    ref="svgColor"
+    height="60"
+    width="115"
+    view-box="0 0 94 49"
+    fill="none"
+    class="fill-current"
+  >
     <path
       d="M31.5481 10.0381C30.5794 10.0381 29.9605 11.0709 30.4172 11.9251L34.3117 19.2098C34.7786 20.0832 36.0172 20.1202 36.5354 19.2763L41.0093 11.9916C41.534 11.1372 40.9192 10.0381 39.9165 10.0381H31.5481Z"
-      :stroke="$store.getters.isDark ? 'white' : 'black'"
+      :stroke="loader ? 'white' : $store.getters.isDark ? 'white' : 'black'"
       fill="transparent"
     />
     <path
@@ -47,3 +54,14 @@
     />
   </svg>
 </template>
+
+<script>
+export default {
+  props: {
+    loader: {
+      default: false,
+      type: Boolean
+    }
+  }
+}
+</script>

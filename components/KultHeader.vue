@@ -205,18 +205,4 @@ nav > div::after {
 nav > div {
   transition: color 0.4s ease-in-out;
 }
-
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.25, 1.25, 1.25);
-  }
-
-  to {
-    transform: scale3d(1, 1, 1);
-  }
-}
 </style>

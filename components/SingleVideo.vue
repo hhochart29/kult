@@ -20,7 +20,7 @@
             ></div>
           </transition>
           <div
-            class="social flex w-full items-center justify-between mt-5 relative z-50"
+            class="social flex w-full items-center justify-between mt-5 relative z-40"
           >
             <div class="flex">
               <div class="px-2"><clap /></div>
@@ -263,20 +263,6 @@ button:focus {
   100% {
     opacity: 0;
     transform: translateX(-50%) translateY(300%);
-  }
-}
-
-@keyframes pulse {
-  from {
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    transform: scale3d(1.25, 1.25, 1.25);
-  }
-
-  to {
-    transform: scale3d(1, 1, 1);
   }
 }
 

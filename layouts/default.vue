@@ -3,9 +3,9 @@
     <transition name="fade">
       <div
         v-if="loading"
-        class="z-50 fixed w-screen h-screen top-0 left-0 bg-black"
+        class="z-50 fixed w-screen h-screen top-0 left-0 bg-black flex items-center justify-center"
       >
-        <main-logo class="text-blue" />
+        <main-logo class="logo-loading text-white" :loader="true" />
       </div>
     </transition>
     <kult-header />
@@ -25,7 +25,7 @@ export default {
     MainLogo
   },
   data: () => ({
-    loading: false
+    loading: true
   }),
   computed: {
     storeCurrentColor() {
@@ -67,5 +67,9 @@ export default {
 
 main {
   transition: background-color 0.4s ease-in-out;
+}
+
+.logo-loading {
+  animation: 2.4s ease-in-out pulse infinite;
 }
 </style>
