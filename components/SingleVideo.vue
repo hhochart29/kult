@@ -101,8 +101,6 @@ import Share from '@/components/svg/Share'
 import Bookmark from '@/components/svg/Bookmark'
 import Cinema from '@/components/svg/Cinema'
 import dayjs from 'dayjs'
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
-dayjs.extend(isSameOrAfter)
 
 export default {
   components: {
