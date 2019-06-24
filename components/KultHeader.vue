@@ -1,7 +1,7 @@
 <template>
   <header ref="kultHeader">
     <div
-      class="container mx-auto py-5 lg:py-12 flex justify-between items-center font-sans"
+      class="container mx-auto py-5 lg:py-12 lg:pb-8 flex justify-between items-center font-sans"
     >
       <logo class="relative logo" />
       <nav class="menu-container flex items-center justify-center absolute">

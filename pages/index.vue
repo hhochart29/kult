@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container overflow-visible">
     <div
       ref="homeContainer"
       class="image-container flex justify-center items-center relative z-0 -mt-10"
@@ -103,7 +103,7 @@ export default {
   transform: rotateX(0deg) scaleY(1);
   transform-origin: 0 0;
   @apply absolute z-10 left-0 right-0 bg-blue;
-  height: 75px;
+  height: 85px;
 }
 
 .category > div::after {
@@ -118,7 +118,6 @@ export default {
 
 .category.hovered > div::before,
 .category.hovered > div::after {
-  transition-delay: 0s;
   transform: rotateX(0deg) scaleY(0);
 }
 
